@@ -26,7 +26,7 @@ The business objective of this task is to build and compare classification model
 - Our target variable was `y`, which indicated whether the client subscribed to a term deposit (`yes` / `no`)
 - The dataset was imbalanced, where about 11.3% subscribed and 88.7% did not subscribe
 - The dataset no standard `NaN` values to indicate missing information; several categorical variables use `"unknown"` as a missing-value label
-- The `duration` feature was excluded from the realistic model because call duration is only known after the call occurs, so it would leak information unavailable at prediction time
+- The `duration` feature was excluded from the realistic models because call duration is only known after the call occurs, so it would leak information unavailable at prediction time
 
 ---
 
@@ -65,12 +65,12 @@ The notebook also reports accuracy, precision, recall, and F1 score for the posi
 #### Simple Models Using Bank Client Only Features
 | Model | Train Time (s) | Train Accuracy | Test Accuracy |
 | --- | ---: | ---: | ---: | 
-| Logistic Regression | 0.550986 | 0.887341 | 0.887324 |
-| KNN | 0.109435 | 0.889557 | 0.876032 |
-| Decision Tree | 3.315791 | 0.917608 | 0.863526 |
-| SVM | 164.267038 | 0.888100 | 0.887810 |
+| Logistic Regression | 0.757171 | 0.887341 | 0.887324 |
+| KNN | 0.147772 | 0.889557 | 0.876032 |
+| Decision Tree | 2.223616 | 0.917608 | 0.863526 |
+| SVM | 164.804684 | 0.888100 | 0.887810 |
 
-From these results, we can see that all four models perform similarly to the baseline model. Ultimately, Decision Tree performs best in training accuracy but worst in test accuracy, while SVC performs best in test accuracy but is the slowest model by far. All models performed better than the baseline in training, however Decision Tree performed worse than the baseline in test accuracy while the other three performed slightly better than baseline.
+From these results, we can see that all four models perform similarly to the baseline model. Ultimately, Decision Tree performs best in training accuracy but worst in test accuracy, while SVC performs best in test accuracy but is the slowest model by far. All models performed better than the baseline in training, however Decision Tree and KNN performed worse than the baseline in test accuracy while the other two performed slightly better than baseline.
 
 ### Tuned Models Using the Full Realistic Feature Set
 
@@ -96,7 +96,7 @@ The strongest models are close in performance, so interpretability and business 
 - Campaign and economic context improve prediction: adding contact information, previous campaign outcomes, and economic indicators increases ROC-AUC substantially
 - Past campaign success is one of the strongest signals: clients who subscribed in a previous campaign are much more likely to subscribe again
 - Channel and timing matter: cellular contacts and certain months show higher subscription rates
-- Logistic Regression is a strong practical choice: he best model may vary slightly by sample, but Logistic Regression is a strong practical option because it balances performance and interpretability
+- Logistic Regression is a strong practical choice: the best model may vary slightly by sample, but Logistic Regression is a strong practical option because it balances performance and interpretability
 
 ---
 
@@ -112,7 +112,7 @@ The strongest models are close in performance, so interpretability and business 
 
 ## Next Steps
 
-- Tune the decision threshold: the default threshold may not be best for the business. The bank should choose a threshold based on call cost and expected value of a subscription
+- Tune the decision threshold: the default threshold may not be best for the business; the bank should choose a threshold based on call cost and expected value of a subscription
 - Run a lift/gains analysis: marketing managers would benefit from knowing how many subscribers can be captured by calling the top 10%, 20%, or 30% of ranked clients
 - Validate over time: since economic conditions change, train on earlier campaigns and test on later campaigns before deployment
 - Consider additional models: random Forest or Gradient Boosting may improve performance, but the current assignment focuses on KNN, Logistic Regression, Decision Trees, and SVM
@@ -128,7 +128,7 @@ The strongest models are close in performance, so interpretability and business 
 │   └── bank-additional-full.csv   # Full dataset
 │   └── bank-additional-names.txt  # Data dictionary
 |   └── bank-additional.csv        # Smaller dataset sample
-└── CRISP-DM-BANK.pdf              # Reference paper
+├── CRISP-DM-BANK.pdf              # Reference paper
+├── README.md                      # Project summary and findings
 └── prompt_III.ipynb               # Completed and executed notebook
-└── README.md                      # Project summary and findings
 ```
